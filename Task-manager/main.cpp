@@ -17,12 +17,11 @@ int main()
 		con = driver->connect("tcp://localhost:3306",
 			"andrejmanin", "pfRto0$gosArO");
 
-		con->setSchema("tasks_db"); // your database name 
+		con->setSchema("tasks_db"); 
 
 		sql::Statement* stmt;
 		stmt = con->createStatement();
 
-		// SQL query to create a table 
 		string createTableSQL
 			= "CREATE TABLE IF NOT EXISTS Tasks ("
 			"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,"
@@ -40,13 +39,11 @@ int main()
 			stmt->execute(insertDataSQL);
 		}
 
-		// SQL query to retrieve data from the table 
 		string selectDataSQL = "SELECT * FROM Tasks";
 
 		sql::ResultSet* res
 			= stmt->executeQuery(selectDataSQL);
 
-		// Loop through the result set and display data 
 		int count = 0;
 		while (res->next()) {
 			cout << " Task " << ++count << ": "
